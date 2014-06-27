@@ -1,0 +1,12 @@
+CREATE TABLE [core].[Address]
+(
+  [AddressId] SMALLINT NOT NULL IDENTITY (1, 1)
+, [Address1] VARCHAR(100) NOT NULL
+, [Address2] VARCHAR(100) NULL
+, [Address3] VARCHAR(100) NULL
+, [Address4] VARCHAR(100) NULL
+, [PostCode] VARCHAR(20) NOT NULL
+, [Country] VARCHAR(30) NOT NULL
+, [Telephone] VARCHAR(30) NOT NULL
+, CONSTRAINT PK_Address PRIMARY KEY CLUSTERED ( [AddressId] )
+)

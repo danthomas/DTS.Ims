@@ -1,0 +1,14 @@
+CREATE TABLE [companies].[AccountType]
+(
+  [AccountTypeCode] CHAR(1) NOT NULL
+, [AccountTypeName] VARCHAR(50) NOT NULL
+, [IsActive] BIT NOT NULL
+, CONSTRAINT PK_AccountType PRIMARY KEY CLUSTERED ( [AccountTypeCode] )
+)
+GO
+CREATE UNIQUE NONCLUSTERED INDEX AK_AccountType_AccountTypeName ON [companies].[AccountType]
+(
+	[AccountTypeName] ASC
+)
+INCLUDE ([AccountTypeCode], [IsActive])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

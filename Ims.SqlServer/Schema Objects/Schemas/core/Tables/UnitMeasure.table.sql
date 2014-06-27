@@ -1,0 +1,23 @@
+CREATE TABLE [core].[UnitMeasure]
+(
+  [UnitMeasureId] TINYINT NOT NULL
+, [UnitMeasureCode] VARCHAR(20) NOT NULL
+, [UnitMeasureName] VARCHAR(100) NOT NULL
+, [ConversionToBaseMeasure] DECIMAL(18, 6) NOT NULL
+, [IsActive] BIT NOT NULL
+, CONSTRAINT PK_UnitMeasure PRIMARY KEY CLUSTERED ( [UnitMeasureId] )
+)
+GO
+CREATE UNIQUE NONCLUSTERED INDEX AK_UnitMeasure_UnitMeasureCode ON [core].[UnitMeasure]
+(
+	[UnitMeasureCode] ASC
+)
+INCLUDE ([UnitMeasureName], [ConversionToBaseMeasure], [IsActive])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX AK_UnitMeasure_UnitMeasureName ON [core].[UnitMeasure]
+(
+	[UnitMeasureName] ASC
+)
+INCLUDE ([UnitMeasureCode], [ConversionToBaseMeasure], [IsActive])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

@@ -1,0 +1,15 @@
+CREATE TABLE [core].[ErrorLog]
+(
+  [ErrorLogId] INT NOT NULL IDENTITY (1, 1)
+, [Date] DATETIME2(0) NOT NULL
+, [Thread] NVARCHAR(255) NOT NULL
+, [Level] NVARCHAR(50) NOT NULL
+, [Logger] NVARCHAR(255) NOT NULL
+, [Message] NVARCHAR(4000) NOT NULL
+, [Exception] NVARCHAR(MAX) NULL
+, [MachineName] NVARCHAR(255) NULL
+, [ApplicationVersion] VARCHAR(100) NULL
+, [SupportNumber] NVARCHAR(20) NULL
+, [Username] NVARCHAR(100) NULL
+, CONSTRAINT PK_ErrorLog PRIMARY KEY CLUSTERED ( [ErrorLogId] )
+)

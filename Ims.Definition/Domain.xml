@@ -1,0 +1,395 @@
+﻿<domain name='Ims'>
+  <group name='admin'>
+    <entity name='AppVersion'>
+      <property name='AppVersionId' sqlServerType='TINYINT' isAuto='true' isIdentifier='true' />
+      <property name='VersionNumber' sqlServerType='VARCHAR' length='50' />
+      <property name='ComponentCode' sqlServerType='VARCHAR' length='50' />
+      <property name='ComponentName' sqlServerType='VARCHAR' length='200' />
+      <property name='IsSolution' sqlServerType='BIT' />
+      <property name='Notes' sqlServerType='VARCHAR' isNullable='true' length='-1' />
+      <property name='ServerList' sqlServerType='VARCHAR' isNullable='true' length='-1' />
+      <property name='CreateDateTimeUtc' sqlServerType='SMALLDATETIME' />
+      <property name='CreateUserName' sqlServerType='VARCHAR' length='100' />
+      <property name='UpdateDateTimeUtc' sqlServerType='SMALLDATETIME' isNullable='true' />
+      <property name='UpdateUserName' sqlServerType='VARCHAR' isNullable='true' length='100' />
+    </entity>
+  </group>
+  <group name='audit'>
+    <entity name='AppVersionHistory'>
+      <property name='AppVersionHistoryId' sqlServerType='TINYINT' isAuto='true' isIdentifier='true' />
+      <property name='AppVersionId' sqlServerType='TINYINT' />
+      <property name='VersionNumber' sqlServerType='VARCHAR' length='50' />
+      <property name='ComponentCode' sqlServerType='VARCHAR' length='50' />
+      <property name='ComponentName' sqlServerType='VARCHAR' length='200' />
+      <property name='IsSolution' sqlServerType='BIT' />
+      <property name='Notes' sqlServerType='VARCHAR' isNullable='true' length='-1' />
+      <property name='ServerList' sqlServerType='VARCHAR' isNullable='true' length='-1' />
+      <property name='CreateDateTimeUtc' sqlServerType='SMALLDATETIME' />
+      <property name='CreateUserName' sqlServerType='VARCHAR' length='100' />
+      <property name='UpdateDateTimeUtc' sqlServerType='SMALLDATETIME' isNullable='true' />
+      <property name='UpdateUserName' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='VersionHistoryDateTimeUtc' sqlServerType='VARCHAR' length='100' />
+      <property name='Action' sqlServerType='CHAR' length='1' />
+    </entity>
+  </group>
+  <group name='companies'>
+    <entity name='Account' entityType='Static'>
+      <property name='AccountId' sqlServerType='SMALLINT' isAuto='true' isIdentifier='true' />
+      <property name='AccountCode' sqlServerType='VARCHAR' length='20' />
+      <property name='AccountName' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='AccountTypeCode' referencedEntity='AccountType' />
+      <property name='CompanyId' referencedEntity='Company' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='AccountCode, CompanyId' includedProperties='AccountName, AccountTypeCode, IsActive' isUnique='true' />
+      <procedure procedureType='Insert' />
+      <procedure procedureType='Update' />
+      <procedure procedureType='DeleteMany' />
+      <procedure procedureType='Select' properties='AccountId'/>
+      <procedure procedureType='SelectMany' properties='CompanyId'/>
+      <action type='Add' />
+      <action type='Edit' />
+      <action type='Delet' />
+
+    </entity>
+    <entity name='AccountType' entityType='Enum'>
+      <property name='AccountTypeCode' sqlServerType='CHAR' length='1' isIdentifier='true' isReadOnly='true' />
+      <property name='AccountTypeName' sqlServerType='VARCHAR' length='50' isReadOnly='true' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='AccountTypeName' includedProperties='AccountTypeCode, IsActive' isUnique='true' />
+      <rows>
+        <row accountTypeCode='H' AccountTypeName='House' isActive='true' />
+        <row accountTypeCode='C' AccountTypeName='Customer' isActive='true' />
+      </rows>
+    </entity>
+    <entity name='Company'>
+      <property name='CompanyId' sqlServerType='SMALLINT' isAuto='true' isIdentifier='true' />
+      <property name='CompanyCode' sqlServerType='VARCHAR' length='5' />
+      <property name='CompanyName' sqlServerType='VARCHAR' length='100' />
+      <property name='CompanyTypeId' referencedEntity='CompanyType' />
+      <property name='Address' sqlServerType='VARCHAR' length='250' />
+      <property name='PostCode' sqlServerType='VARCHAR' length='10' />
+      <property name='Telephone' sqlServerType='VARCHAR' length='20' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <property name='LastModified' sqlServerType='DATETIME2' scale='0' />
+      <index properties='CompanyName, CompanyTypeId' isUnique='true' />
+      <index properties='CompanyCode, CompanyTypeId' isUnique='true' />
+    </entity>
+    <entity name='CompanyType' entityType='Enum'>
+      <property name='CompanyTypeId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='CompanyTypeCode' sqlServerType='VARCHAR' length='50' isReadOnly='true' />
+      <property name='CompanyTypeName' sqlServerType='VARCHAR' length='50' isReadOnly='true' />
+      <property name='CanSeeAllData' sqlServerType='BIT' />
+      <index properties='CompanyTypeName' includedProperties='CompanyTypeCode, CanSeeAllData' isUnique='true' />
+      <index properties='CompanyTypeCode' includedProperties='CompanyTypeName, CanSeeAllData' isUnique='true' />
+    </entity>
+  </group>
+  <group name='core'>
+    <entity name='Address'>
+      <property name='AddressId' sqlServerType='SMALLINT' isAuto='true' isIdentifier='true' />
+      <property name='Address1' sqlServerType='VARCHAR' length='100' />
+      <property name='Address2' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='Address3' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='Address4' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='PostCode' sqlServerType='VARCHAR' length='20' />
+      <property name='Country' sqlServerType='VARCHAR' length='30' />
+      <property name='Telephone' sqlServerType='VARCHAR' length='30' />
+    </entity>
+    <entity name='Batch'>
+      <property name='BatchId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='GridId' referencedEntity='Grid' />
+      <property name='UserId' referencedEntity='UserProfile' />
+      <property name='BatchName' sqlServerType='VARCHAR' length='50' />
+      <index properties='GridId, UserId, BatchName' isUnique='true' />
+    </entity>
+    <entity name='BatchItem'>
+      <property name='BatchId' referencedEntity='Batch' isIdentifier='true' />
+      <property name='ItemId' sqlServerType='INT' isIdentifier='true' />
+    </entity>
+    <entity name='Config'>
+      <property name='ConfigId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='ConfigName' sqlServerType='VARCHAR' isNullable='true' length='28' isReadOnly='true' />
+      <property name='ConfigValue' sqlServerType='VARCHAR' isNullable='true' length='255' />
+      <property name='IsActive' sqlServerType='BIT' isNullable='true' />
+      <index properties='ConfigName' isUnique='true' />
+    </entity>
+    <entity name='Contract'>
+      <property name='ContractId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='ContractCode' sqlServerType='VARCHAR' length='20' isReadOnly='true' />
+      <property name='ContractName' sqlServerType='VARCHAR' length='100' isReadOnly='true' />
+      <property name='ExchangeCompanyId' referencedEntity='Company' />
+      <property name='ProductId' referencedEntity='Product' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='ContractCode' includedProperties='ContractName, ExchangeCompanyId, ProductId, IsActive' isUnique='true' />
+      <index properties='ContractName' includedProperties='ContractCode, ExchangeCompanyId, ProductId, IsActive' isUnique='true' />
+    </entity>
+    <entity name='ContractUnit'>
+      <property name='ContractUnitId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='ContractId' referencedEntity='Contract' />
+      <property name='ContractUnitCode' sqlServerType='VARCHAR' length='10' />
+      <property name='NetSize' sqlServerType='DECIMAL' precision='18' scale='6' />
+      <property name='UnitMeasureId' referencedEntity='UnitMeasure' />
+      <property name='TolerancePercentage' sqlServerType='DECIMAL' precision='5' scale='2' />
+      <index properties='ContractId, ContractUnitCode' includedProperties='NetSize, UnitMeasureId' isUnique='true' />
+    </entity>
+    <entity name='ErrorLog'>
+      <property name='ErrorLogId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='Date' sqlServerType='DATETIME2' scale='0' />
+      <property name='Thread' sqlServerType='NVARCHAR' length='255' />
+      <property name='Level' sqlServerType='NVARCHAR' length='50' />
+      <property name='Logger' sqlServerType='NVARCHAR' length='255' />
+      <property name='Message' sqlServerType='NVARCHAR' length='4000' />
+      <property name='Exception' sqlServerType='NVARCHAR' isNullable='true' length='-1' />
+      <property name='MachineName' sqlServerType='NVARCHAR' isNullable='true' length='255' />
+      <property name='ApplicationVersion' sqlServerType='VARCHAR' isNullable='true' length='100' />
+      <property name='SupportNumber' sqlServerType='NVARCHAR' isNullable='true' length='20' />
+      <property name='Username' sqlServerType='NVARCHAR' isNullable='true' length='100' />
+    </entity>
+    <entity name='Grid'>
+      <property name='GridId' sqlServerType='TINYINT' isAuto='true' isIdentifier='true' />
+      <property name='GridName' sqlServerType='VARCHAR' length='50' />
+      <index properties='GridName' isUnique='true' />
+    </entity>
+    <entity name='Location'>
+      <property name='LocationId' sqlServerType='SMALLINT' isAuto='true' isIdentifier='true' />
+      <property name='LocationCode' sqlServerType='VARCHAR' length='20' />
+      <property name='LocationName' sqlServerType='VARCHAR' length='100' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='LocationCode' includedProperties='LocationName, IsActive' isUnique='true' />
+      <index properties='LocationName' includedProperties='LocationCode, IsActive' isUnique='true' />
+      <procedure procedureType='Insert' />
+      <procedure procedureType='Update' />
+      <procedure procedureType='DeleteMany' />
+      <procedure procedureType='Select' properties='LocationId'/>
+      <procedure procedureType='Select' properties='LocationCode'/>
+    </entity>
+    <entity name='LookupEntity'>
+      <property name='LookupEntityId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='LookupEntityTypeId' referencedEntity='LookupEntityType' />
+      <property name='LookupEntityDesc' sqlServerType='NVARCHAR' isNullable='true' length='50' />
+      <property name='LookupEntityCode' sqlServerType='VARCHAR' length='10' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='LookupEntityTypeId, LookupEntityCode' isUnique='true' />
+    </entity>
+    <entity name='LookupEntityType'>
+      <property name='LookupEntityTypeId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='LookupEntityTypeDesc' sqlServerType='NVARCHAR' isNullable='true' length='50' />
+      <property name='LookupEntityTypeCode' sqlServerType='VARCHAR' length='10' />
+      <index properties='LookupEntityTypeCode' isUnique='true' />
+    </entity>
+    <entity name='Product'>
+      <property name='ProductId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='ProductCode' sqlServerType='VARCHAR' length='20' isReadOnly='true' />
+      <property name='ProductName' sqlServerType='VARCHAR' length='100' isReadOnly='true' />
+      <property name='ProductTypeId' referencedEntity='ProductType' />
+      <property name='UnitMeasureId' referencedEntity='UnitMeasure' />
+      <property name='SizeMaxDp' sqlServerType='TINYINT' />
+      <property name='AutoIssueWarrants' sqlServerType='BIT' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='ProductCode' includedProperties='ProductName, ProductTypeId, IsActive' isUnique='true' />
+      <index properties='ProductName' includedProperties='ProductCode, ProductTypeId, IsActive' isUnique='true' />
+    </entity>
+    <entity name='ProductType' entityType='Enum'>
+      <property name='ProductTypeId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='ProductTypeCode' sqlServerType='VARCHAR' length='50' isReadOnly='true' />
+      <property name='ProductTypeName' sqlServerType='VARCHAR' length='100' isReadOnly='true' />
+      <index properties='ProductTypeCode' includedProperties='ProductTypeName' isUnique='true' />
+      <index properties='ProductTypeName' includedProperties='ProductTypeCode' isUnique='true' />
+    </entity>
+    <entity name='UnitMeasure'>
+      <property name='UnitMeasureId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='UnitMeasureCode' sqlServerType='VARCHAR' length='20' />
+      <property name='UnitMeasureName' sqlServerType='VARCHAR' length='100' />
+      <property name='ConversionToBaseMeasure' sqlServerType='DECIMAL' precision='18' scale='6' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='UnitMeasureCode' includedProperties='UnitMeasureName, ConversionToBaseMeasure, IsActive' isUnique='true' />
+      <index properties='UnitMeasureName' includedProperties='UnitMeasureCode, ConversionToBaseMeasure, IsActive' isUnique='true' />
+    </entity>
+  </group>
+  <group name='dbo'>
+    <entity name='DatabaseVersions'>
+      <property name='DatabaseVersionId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='VersionNumber' sqlServerType='VARCHAR' isNullable='true' length='20' />
+    </entity>
+    <entity name='UserProfile'>
+      <property name='UserId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='CompanyId' referencedEntity='Company' />
+      <property name='UserName' sqlServerType='NVARCHAR' length='30' />
+      <property name='EmailAddress' sqlServerType='NVARCHAR' length='255' />
+      <property name='FirstName' sqlServerType='NVARCHAR' length='255' />
+      <property name='LastName' sqlServerType='NVARCHAR' length='255' />
+      <property name='MemorableWord' sqlServerType='NVARCHAR' isNullable='true' length='50' />
+      <property name='MemorableWordIndices' sqlServerType='NVARCHAR' isNullable='true' length='11' />
+      <property name='ActiveStatus' sqlServerType='BIT' />
+      <property name='IsConfirmed' sqlServerType='BIT' />
+      <property name='IsWindowsUser' sqlServerType='BIT' />
+      <property name='LastModified' sqlServerType='DATETIME' />
+      <index properties='UserName' includedProperties='EmailAddress, FirstName, LastName, ActiveStatus, LastModified' isUnique='true' />
+    </entity>
+    <entity name='Membership' tableName='webpages_Membership'>
+      <property name='UserId' sqlServerType='INT' isIdentifier='true' />
+      <property name='CreateDate' sqlServerType='DATETIME' isNullable='true' />
+      <property name='ConfirmationToken' sqlServerType='NVARCHAR' isNullable='true' length='128' />
+      <property name='IsConfirmed' sqlServerType='BIT' isNullable='true' />
+      <property name='LastPasswordFailureDate' sqlServerType='DATETIME' isNullable='true' />
+      <property name='PasswordFailuresSinceLastSuccess' sqlServerType='INT' />
+      <property name='Password' sqlServerType='NVARCHAR' length='128' />
+      <property name='PasswordChangedDate' sqlServerType='DATETIME' isNullable='true' />
+      <property name='PasswordSalt' sqlServerType='NVARCHAR' length='128' />
+      <property name='PasswordVerificationToken' sqlServerType='NVARCHAR' isNullable='true' length='128' />
+      <property name='PasswordVerificationTokenExpirationDate' sqlServerType='DATETIME' isNullable='true' />
+    </entity>
+    <entity name='Roles' tableName='webpages_Roles'>
+      <property name='RoleId' sqlServerType='SMALLINT' isIdentifier='true' />
+      <property name='RoleName' sqlServerType='NVARCHAR' length='256' />
+      <index properties='RoleName' isUnique='true' />
+    </entity>
+    <entity name='UsersInRoles' tableName='webpages_UsersInRoles'>
+      <property name='UserId' referencedEntity='UserProfile' isIdentifier='true' />
+      <property name='RoleId' referencedEntity='Roles' isIdentifier='true' />
+      <index properties='RoleId' />
+    </entity>
+  </group>
+  <group name='inventory'>
+    <entity name='Request'>
+      <property name='RequestId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='RequestTypeId' referencedEntity='RequestType' />
+      <property name='CreatedByCompanyId' referencedEntity='Company' />
+      <property name='FromCompanyId' referencedEntity='Company' />
+      <property name='ToCompanyId' referencedEntity='Company' />
+      <property name='Total' sqlServerType='SMALLINT' />
+      <property name='IncompleteCount' sqlServerType='SMALLINT' />
+      <property name='AcceptedCount' sqlServerType='SMALLINT' />
+      <property name='RejectedCount' sqlServerType='SMALLINT' />
+      <property name='DateTimeCreated' sqlServerType='DATETIME2' scale='0' />
+      <procedure procedureType='Insert' />
+      <procedure procedureType='Update' />
+      <procedure procedureType='DeleteMany' />
+      <procedure procedureType='Select' properties='RequestId'/>
+      <procedure procedureType='SelectMany' properties='RequestTypeId, CreatedByCompanyId'/>
+    </entity>
+    <entity name='RequestStatus' entityType='Enum'>
+      <property name='RequestStatusId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='RequestStatusCode' sqlServerType='VARCHAR' length='20' />
+      <property name='RequestStatusName' sqlServerType='VARCHAR' length='30' />
+      <property name='RequestTypeId' referencedEntity='RequestType' />
+      <property name='IsAccepted' sqlServerType='BIT' isNullable='true' />
+      <index properties='RequestStatusCode' includedProperties='RequestStatusName' isUnique='true' />
+      <index properties='RequestStatusName' includedProperties='RequestStatusCode' isUnique='true' />
+    </entity>
+    <entity name='RequestType' entityType='Enum'>
+      <property name='RequestTypeId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='RequestTypeCode' sqlServerType='VARCHAR' length='50' />
+      <property name='RequestTypeName' sqlServerType='VARCHAR' length='100' />
+      <index properties='RequestTypeCode' includedProperties='RequestTypeName' isUnique='true' />
+      <index properties='RequestTypeName' includedProperties='RequestTypeCode' isUnique='true' />
+    </entity>
+    <entity name='RequestWarrant'>
+      <property name='RequestWarrantId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='RequestId' referencedEntity='Request' />
+      <property name='WarrantId' referencedEntity='Warrant' />
+      <property name='RequestStatusId' referencedEntity='RequestStatus' />
+      <property name='IsAccepted' sqlServerType='BIT' isNullable='true' />
+      <index properties='WarrantId' isUnique='true' />
+    </entity>
+    <entity name='Unit'>
+      <property name='UnitId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='UnitNumber' sqlServerType='VARCHAR' length='30' />
+      <property name='StoreId' referencedEntity='Store' />
+      <property name='StorageCompanyId' referencedEntity='Company' />
+      <property name='LocationId' referencedEntity='Location' />
+      <property name='ProductId' referencedEntity='Product' />
+      <property name='DateStored' sqlServerType='DATE' isNullable='true' />
+      <property name='NetSize' sqlServerType='DECIMAL' isNullable='true' precision='18' scale='6' />
+      <property name='GrossSize' sqlServerType='DECIMAL' isNullable='true' precision='18' scale='6' />
+      <property name='UnitMeasureId' referencedEntity='UnitMeasure' isNullable='true' />
+      <property name='Owner' sqlServerType='VARCHAR' length='50' />
+      <property name='Reference1' sqlServerType='VARCHAR' length='50' />
+      <property name='Reference2' sqlServerType='VARCHAR' length='50' />
+      <property name='Reference3' sqlServerType='VARCHAR' length='50' />
+      <property name='Notes1' sqlServerType='VARCHAR' length='1000' />
+      <property name='Notes2' sqlServerType='VARCHAR' length='1000' />
+      <property name='Notes3' sqlServerType='VARCHAR' length='1000' />
+      <property name='WarrantId' referencedEntity='Warrant' isNullable='true' />
+      <index properties='UnitNumber, StorageCompanyId, LocationId' includedProperties='StoreId, ProductId, WarrantId' isUnique='true' />
+    </entity>
+    <entity name='Warrant'>
+      <property name='WarrantId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='WarrantNumber' sqlServerType='VARCHAR' length='30' />
+      <property name='StorageCompanyId' referencedEntity='Company' />
+      <property name='StoreId' referencedEntity='Store' />
+      <property name='LocationId' referencedEntity='Location' />
+      <property name='ContractId' referencedEntity='Contract' />
+      <property name='ContractUnitId' referencedEntity='ContractUnit' />
+      <property name='DateIssued' sqlServerType='DATE' />
+      <property name='NetSize' sqlServerType='DECIMAL' precision='18' scale='6' />
+      <property name='GrossSize' sqlServerType='DECIMAL' precision='18' scale='6' />
+      <property name='UnitMeasureId' referencedEntity='UnitMeasure' />
+      <property name='AssignedToCompanyId' referencedEntity='Company' isNullable='true' />
+      <property name='AccountId' referencedEntity='Account' isNullable='true' />
+      <index properties='WarrantNumber, StorageCompanyId, LocationId' includedProperties='ContractId' isUnique='true' />
+      <index properties='AssignedToCompanyId, AccountId' includedProperties='WarrantNumber, StorageCompanyId, ContractId' />
+    </entity>
+    <entity name='WarrantMovement'>
+      <property name='WarrantMovementId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='WarrantId' referencedEntity='Warrant' />
+      <property name='AccountHolderCompanyId' referencedEntity='Company' />
+      <property name='AccountId' referencedEntity='Account' isNullable='true' />
+      <property name='MovementDateTimeUtc' sqlServerType='DATETIME2' scale='0' />
+      <property name='MovedByUserId' sqlServerType='INT' />
+      <property name='RequestId' sqlServerType='INT' isNullable='true' />
+      <index properties='WarrantId, AccountHolderCompanyId, AccountId, MovementDateTimeUtc' includedProperties='MovedByUserId' />
+    </entity>
+  </group>
+  <group name='messaging'>
+    <entity name='Message'>
+      <property name='MessageId' sqlServerType='INT' isAuto='true' isIdentifier='true' />
+      <property name='MessageTypeId' referencedEntity='MessageType' />
+      <property name='FromCompanyId' referencedEntity='Company' />
+      <property name='ToCompanyId' referencedEntity='Company' />
+      <property name='Title' sqlServerType='VARCHAR' length='100' />
+      <property name='Body' sqlServerType='VARCHAR' length='-1' />
+      <property name='Sent' sqlServerType='DATETIME2' scale='0' />
+      <property name='RequestId' sqlServerType='INT' isNullable='true' />
+    </entity>
+    <entity name='MessageType' entityType='Enum'>
+      <property name='MessageTypeId' sqlServerType='TINYINT' isIdentifier='true' />
+      <property name='MessageTypeCode' sqlServerType='VARCHAR' length='50' isReadOnly='true' />
+      <property name='MessageTypeName' sqlServerType='VARCHAR' length='100' isReadOnly='true' />
+      <index properties='MessageTypeCode' includedProperties='MessageTypeName' isUnique='true' />
+      <index properties='MessageTypeName' includedProperties='MessageTypeCode' isUnique='true' />
+    </entity>
+  </group>
+  <group name='security'>
+    <entity name='Feature'>
+      <property name='FeatureId' sqlServerType='SMALLINT' isIdentifier='true' />
+      <property name='FeatureCode' sqlServerType='VARCHAR' length='20' isReadOnly='true' />
+      <property name='FeatureName' sqlServerType='NVARCHAR' length='50' isReadOnly='true' />
+      <index properties='FeatureName' includedProperties='FeatureCode' isUnique='true' />
+      <index properties='FeatureCode' includedProperties='FeatureName' isUnique='true' />
+    </entity>
+    <entity name='RoleFeature'>
+      <property name='RoleId' referencedEntity='Roles' isIdentifier='true' />
+      <property name='FeatureId' referencedEntity='Feature' isIdentifier='true' />
+    </entity>
+  </group>
+  <group name='storage'>
+    <entity name='Store'>
+      <property name='StoreId' sqlServerType='SMALLINT' isAuto='true' isIdentifier='true' />
+      <property name='StorageCompanyId' referencedEntity='Company' />
+      <property name='StoreCode' sqlServerType='NVARCHAR' length='50' />
+      <property name='StoreName' sqlServerType='NVARCHAR' length='100' />
+      <property name='LocationId' referencedEntity='Location' />
+      <property name='IsActive' sqlServerType='BIT' />
+      <index properties='StoreCode' includedProperties='StorageCompanyId, StoreName' isUnique='true' />
+      <index properties='StoreName' includedProperties='StorageCompanyId, StoreCode' isUnique='true' />
+      <procedure procedureType='Insert' />
+      <procedure procedureType='Update' />
+      <procedure procedureType='DeleteMany' />
+    </entity>
+    <entity name='StoreProduct'>
+      <property name='StoreId' referencedEntity='Store' isIdentifier='true' />
+      <property name='ProductId' referencedEntity='Product' isIdentifier='true' />
+      <index properties='StoreId, ProductId' isUnique='true' />
+    </entity>
+  </group>
+</domain>

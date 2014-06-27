@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Ims.SqlServer</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a723cd9a-d9a1-4e47-afcb-3c2b791109e3}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Ims.SqlServer</RootNamespace>
+    <AssemblyName>Ims.SqlServer</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Schema Objects" />
+    <Folder Include="Schema Objects\Database Level Objects" />
+    <Folder Include="Schema Objects\Database Level Objects\Security" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Schemas" />
+    <Folder Include="Schema Objects\Schemas" />
+    <Folder Include="Schema Objects\Schemas\admin" />
+    <Folder Include="Schema Objects\Schemas\admin\Tables" />
+    <Folder Include="Schema Objects\Schemas\audit" />
+    <Folder Include="Schema Objects\Schemas\audit\Tables" />
+    <Folder Include="Schema Objects\Schemas\companies" />
+    <Folder Include="Schema Objects\Schemas\companies\Tables" />
+    <Folder Include="Schema Objects\Schemas\core" />
+    <Folder Include="Schema Objects\Schemas\core\Tables" />
+    <Folder Include="Schema Objects\Schemas\dbo" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables" />
+    <Folder Include="Schema Objects\Schemas\inventory" />
+    <Folder Include="Schema Objects\Schemas\inventory\Tables" />
+    <Folder Include="Schema Objects\Schemas\messaging" />
+    <Folder Include="Schema Objects\Schemas\messaging\Tables" />
+    <Folder Include="Schema Objects\Schemas\security" />
+    <Folder Include="Schema Objects\Schemas\security\Tables" />
+    <Folder Include="Schema Objects\Schemas\storage" />
+    <Folder Include="Schema Objects\Schemas\storage\Tables" />
+    <Folder Include="Schema Objects\Schemas\companies\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\core\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\security\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\messaging\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\inventory\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\admin\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\companies\Programmability" />
+    <Folder Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\admin\Programmability" />
+    <Folder Include="Schema Objects\Schemas\audit\Programmability" />
+    <Folder Include="Schema Objects\Schemas\audit\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\core\Programmability" />
+    <Folder Include="Schema Objects\Schemas\core\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\inventory\Programmability" />
+    <Folder Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\messaging\Programmability" />
+    <Folder Include="Schema Objects\Schemas\messaging\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\security\Programmability" />
+    <Folder Include="Schema Objects\Schemas\security\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\storage\Programmability" />
+    <Folder Include="Schema Objects\Schemas\storage\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\SqlClr" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\admin.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\audit.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\companies.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\core.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\inventory.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\messaging.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\security.schema.sql" />
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\storage.schema.sql" />
+    <Build Include="Schema Objects\Schemas\admin\Tables\AppVersion.table.sql" />
+    <Build Include="Schema Objects\Schemas\audit\Tables\AppVersionHistory.table.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Account.table.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\AccountType.table.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Company.table.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\CompanyType.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Address.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Batch.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\BatchItem.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Config.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Contract.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\ContractUnit.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\ErrorLog.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Grid.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Location.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\LookupEntity.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\LookupEntityType.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Product.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\ProductType.table.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\UnitMeasure.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\DatabaseVersions.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\UserProfile.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\webpages_Membership.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\webpages_Roles.table.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Tables\webpages_UsersInRoles.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Request.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\RequestStatus.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\RequestType.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\RequestWarrant.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Unit.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Warrant.table.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\WarrantMovement.table.sql" />
+    <Build Include="Schema Objects\Schemas\messaging\Tables\Message.table.sql" />
+    <Build Include="Schema Objects\Schemas\messaging\Tables\MessageType.table.sql" />
+    <Build Include="Schema Objects\Schemas\security\Tables\Feature.table.sql" />
+    <Build Include="Schema Objects\Schemas\security\Tables\RoleFeature.table.sql" />
+    <Build Include="Schema Objects\Schemas\storage\Tables\Store.table.sql" />
+    <Build Include="Schema Objects\Schemas\storage\Tables\StoreProduct.table.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\AccountType_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\CompanyType_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\Config_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\Contract_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\Product_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\ProductType_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\security\Tables\Triggers\Feature_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\messaging\Tables\Triggers\MessageType_Update.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\messaging\Tables\Triggers\MessageType_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\AccountType_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\AccountType_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\CompanyType_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Tables\Triggers\CompanyType_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\messaging\Tables\Triggers\MessageType_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Triggers\RequestStatus_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Triggers\RequestStatus_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Triggers\RequestType_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Tables\Triggers\RequestType_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\ProductType_Delete.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\core\Tables\Triggers\ProductType_Insert.trigger.sql" />
+    <Build Include="Schema Objects\Schemas\storage\Programmability\Stored Procedures\Store_Insert.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\storage\Programmability\Stored Procedures\Store_Update.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures\Account_DeleteMany.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures\Account_Insert.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures\Account_Update.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures\Request_DeleteMany.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures\Request_Insert.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures\Request_Update.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\storage\Programmability\Stored Procedures\Store_DeleteMany.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures\Account_SelectByAccountId.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\companies\Programmability\Stored Procedures\Account_SelectManyByCompanyId.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures\Request_SelectByRequestId.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\inventory\Programmability\Stored Procedures\Request_SelectManyByRequestTypeIdCreatedByCompanyId.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\core\Programmability\Stored Procedures\Location_DeleteMany.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\core\Programmability\Stored Procedures\Location_Insert.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\core\Programmability\Stored Procedures\Location_SelectByLocationId.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\core\Programmability\Stored Procedures\Location_Update.procedure.sql" />
+    <Build Include="Schema Objects\Schemas\core\Programmability\Stored Procedures\Location_SelectByLocationCode.procedure.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ims.SqlServer.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Schema Objects\Schemas\dbo\Programmability\SqlClr\ConvertBinaryFunctions.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{992BFFF3-7CD1-4BCF-8952-2B66635AD6F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ims.DataAccess</RootNamespace>
+    <AssemblyName>Ims.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DTS.AppFramework.SqlBuilder">
+      <HintPath>..\References\DTS.AppFramework.SqlBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountDataService.g.cs" />
+    <Compile Include="AccountTypeDataService.g.cs" />
+    <Compile Include="AddressDataService.g.cs" />
+    <Compile Include="AppVersionDataService.g.cs" />
+    <Compile Include="AppVersionHistoryDataService.g.cs" />
+    <Compile Include="BatchDataService.g.cs" />
+    <Compile Include="BatchItemDataService.g.cs" />
+    <Compile Include="CompanyDataService.g.cs" />
+    <Compile Include="CompanyTypeDataService.g.cs" />
+    <Compile Include="ConfigDataService.g.cs" />
+    <Compile Include="ContractDataService.g.cs" />
+    <Compile Include="ContractUnitDataService.g.cs" />
+    <Compile Include="DatabaseVersionsDataService.g.cs" />
+    <Compile Include="ErrorLogDataService.g.cs" />
+    <Compile Include="FeatureDataService.g.cs" />
+    <Compile Include="GridDataService.g.cs" />
+    <Compile Include="LocationDataService.g.cs" />
+    <Compile Include="LookupEntityDataService.g.cs" />
+    <Compile Include="LookupEntityTypeDataService.g.cs" />
+    <Compile Include="MembershipDataService.g.cs" />
+    <Compile Include="MessageDataService.g.cs" />
+    <Compile Include="MessageTypeDataService.g.cs" />
+    <Compile Include="ProductDataService.g.cs" />
+    <Compile Include="ProductTypeDataService.g.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestDataService.g.cs" />
+    <Compile Include="RequestStatusDataService.g.cs" />
+    <Compile Include="RequestTypeDataService.g.cs" />
+    <Compile Include="RequestWarrantDataService.g.cs" />
+    <Compile Include="RoleFeatureDataService.g.cs" />
+    <Compile Include="RolesDataService.g.cs" />
+    <Compile Include="StoreDataService.g.cs" />
+    <Compile Include="StoreProductDataService.g.cs" />
+    <Compile Include="UnitDataService.g.cs" />
+    <Compile Include="UnitMeasureDataService.g.cs" />
+    <Compile Include="UserProfileDataService.g.cs" />
+    <Compile Include="UsersInRolesDataService.g.cs" />
+    <Compile Include="WarrantDataService.g.cs" />
+    <Compile Include="WarrantMovementDataService.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ims.Core\Ims.Core.csproj">
+      <Project>{5eaf6d6c-cb85-471a-b19e-c7ad92dae2dd}</Project>
+      <Name>Ims.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ims.Domain\Ims.Domain.csproj">
+      <Project>{0BE764CE-2EBE-4E00-95A0-1E30CA227E02}</Project>
+      <Name>Ims.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
