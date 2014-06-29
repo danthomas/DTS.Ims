@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using DTS.AppFramework.Core;
 using DTS.AppFramework.SqlBuilder;
 using Ims.Core;
 using Ims.Domain;
@@ -33,33 +34,33 @@ namespace Ims.DataAccess
 
         public virtual void Insert(Account account)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                account.AccountId = transactionScope.ExecuteScalar<short>("companies.Account_Insert", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, account.AccountId), new Parameter("AccountCode", SqlDbType.VarChar, account.AccountCode), new Parameter("AccountName", SqlDbType.VarChar, account.AccountName), new Parameter("AccountTypeCode", SqlDbType.Char, account.AccountTypeCode), new Parameter("CompanyId", SqlDbType.SmallInt, account.CompanyId), new Parameter("IsActive", SqlDbType.Bit, account.IsActive));
+                account.AccountId = imsDataContext.ExecuteScalar<short>("companies.Account_Insert", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, account.AccountId), new Parameter("AccountCode", SqlDbType.VarChar, account.AccountCode), new Parameter("AccountName", SqlDbType.VarChar, account.AccountName), new Parameter("AccountTypeCode", SqlDbType.Char, account.AccountTypeCode), new Parameter("CompanyId", SqlDbType.SmallInt, account.CompanyId), new Parameter("IsActive", SqlDbType.Bit, account.IsActive));
             }
         }
 
         public virtual void Update(Account account)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                transactionScope.ExecuteNonQuery("companies.Account_Update", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, account.AccountId), new Parameter("AccountCode", SqlDbType.VarChar, account.AccountCode), new Parameter("AccountName", SqlDbType.VarChar, account.AccountName), new Parameter("AccountTypeCode", SqlDbType.Char, account.AccountTypeCode), new Parameter("CompanyId", SqlDbType.SmallInt, account.CompanyId), new Parameter("IsActive", SqlDbType.Bit, account.IsActive));
+                imsDataContext.ExecuteNonQuery("companies.Account_Update", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, account.AccountId), new Parameter("AccountCode", SqlDbType.VarChar, account.AccountCode), new Parameter("AccountName", SqlDbType.VarChar, account.AccountName), new Parameter("AccountTypeCode", SqlDbType.Char, account.AccountTypeCode), new Parameter("CompanyId", SqlDbType.SmallInt, account.CompanyId), new Parameter("IsActive", SqlDbType.Bit, account.IsActive));
             }
         }
 
         public virtual void DeleteMany(params short[] ids)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                transactionScope.ExecuteNonQuery("companies.Account_DeleteMany", CommandType.StoredProcedure, new Parameter("Ids", SqlDbType.Binary, ids.ToByteArray()));
+                imsDataContext.ExecuteNonQuery("companies.Account_DeleteMany", CommandType.StoredProcedure, new Parameter("Ids", SqlDbType.Binary, ids.ToByteArray()));
             }
         }
 
         public virtual Account SelectByAccountId(short accountId)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                DataRow dataRow = transactionScope.ExecuteDataRow("companies.Account_SelectByAccountId", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, accountId));
+                DataRow dataRow = imsDataContext.ExecuteDataRow("companies.Account_SelectByAccountId", CommandType.StoredProcedure, new Parameter("AccountId", SqlDbType.SmallInt, accountId));
 
                 return dataRow == null ? null : new Account(dataRow.Field<short>("AccountId"), dataRow.Field<string>("AccountCode"), dataRow.Field<string>("AccountName"), dataRow.Field<string>("AccountTypeCode"), dataRow.Field<short>("CompanyId"), dataRow.Field<bool>("IsActive"));
             }
@@ -67,9 +68,9 @@ namespace Ims.DataAccess
 
         public virtual IEnumerable<Account> SelectManyByCompanyId(short companyId)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                foreach (DataRow dataRow in transactionScope.ExecuteDataRows("companies.Account_SelectManyByCompanyId", CommandType.StoredProcedure, new Parameter("CompanyId", SqlDbType.SmallInt, companyId)))
+                foreach (DataRow dataRow in imsDataContext.ExecuteDataRows("companies.Account_SelectManyByCompanyId", CommandType.StoredProcedure, new Parameter("CompanyId", SqlDbType.SmallInt, companyId)))
                 {
                     yield return new Account(dataRow.Field<short>("AccountId"), dataRow.Field<string>("AccountCode"), dataRow.Field<string>("AccountName"), dataRow.Field<string>("AccountTypeCode"), dataRow.Field<short>("CompanyId"), dataRow.Field<bool>("IsActive"));
                 }
@@ -79,7 +80,7 @@ namespace Ims.DataAccess
 
         public ListReturnValue<T> GetListItems<T>(ListRequest listRequest) where T : new()
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
                 SelectStatement selectStatement = _builder.CreateSelect("companies.Account", "a")
                     .Join("a.AccountTypeCode", "at")
@@ -103,7 +104,7 @@ namespace Ims.DataAccess
                 selectStatement.PageIndex = listRequest.PageIndex;
                 selectStatement.PageSize = listRequest.PageSize;
 
-                DataSet dataSet = transactionScope.ExecuteDataSet(selectStatement.Statement, CommandType.Text);
+                DataSet dataSet = imsDataContext.ExecuteDataSet(selectStatement.Statement, CommandType.Text);
 
 
 

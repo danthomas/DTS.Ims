@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ims.Api", "Ims.Api\Ims.Api.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2456287B-512A-47E4-BBE9-39FC256112C5}"
 	ProjectSection(SolutionItems) = preProject
+		References\DTS.AppFramework.Core.dll = References\DTS.AppFramework.Core.dll
+		References\DTS.AppFramework.Core.pdb = References\DTS.AppFramework.Core.pdb
 		References\DTS.AppFramework.SqlBuilder.dll = References\DTS.AppFramework.SqlBuilder.dll
 		References\DTS.AppFramework.SqlBuilder.pdb = References\DTS.AppFramework.SqlBuilder.pdb
 	EndProjectSection

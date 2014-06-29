@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using DTS.AppFramework.Core;
 using Ims.Core;
 using Ims.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,9 +42,9 @@ namespace Ims.Tests.Core.Extensions
 
         private void RunTest(short[] input)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                List<short> output = transactionScope.ExecuteEnumerable<short>("SELECT * FROM dbo.ConvertBinaryToSmallInt(@IntValues)", CommandType.Text, new Parameter("IntValues", SqlDbType.VarBinary, input == null ? DBNull.Value : input.ToByteArray() as object)).ToList();
+                List<short> output = imsDataContext.ExecuteEnumerable<short>("SELECT * FROM dbo.ConvertBinaryToSmallInt(@IntValues)", CommandType.Text, new Parameter("IntValues", SqlDbType.VarBinary, input == null ? DBNull.Value : input.ToByteArray() as object)).ToList();
 
                 if (input == null) input = new Int16[] { };
 
@@ -85,9 +86,9 @@ namespace Ims.Tests.Core.Extensions
 
         private void RunTest(int[] input)
         {
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (ImsDataContext imsDataContext = new ImsDataContext())
             {
-                List<int> output = transactionScope.ExecuteEnumerable<int>("SELECT * FROM dbo.ConvertBinaryToInt(@IntValues)", CommandType.Text, new Parameter("IntValues", SqlDbType.VarBinary, input == null ? DBNull.Value : input.ToByteArray() as object)).ToList();
+                List<int> output = imsDataContext.ExecuteEnumerable<int>("SELECT * FROM dbo.ConvertBinaryToInt(@IntValues)", CommandType.Text, new Parameter("IntValues", SqlDbType.VarBinary, input == null ? DBNull.Value : input.ToByteArray() as object)).ToList();
 
                 if (input == null) input = new Int32[] { };
 

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DTS.AppFramework.Core">
+      <HintPath>..\References\DTS.AppFramework.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DTS.AppFramework.SqlBuilder">
       <HintPath>..\References\DTS.AppFramework.SqlBuilder.dll</HintPath>
     </Reference>

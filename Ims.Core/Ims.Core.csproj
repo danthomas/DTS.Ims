@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DTS.AppFramework.Core">
+      <HintPath>..\References\DTS.AppFramework.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -42,11 +45,9 @@
   <ItemGroup>
     <Compile Include="Extensions.cs" />
     <Compile Include="ListRequest.cs" />
-    <Compile Include="DataTableExtensions.cs" />
-    <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReturnValue.cs" />
-    <Compile Include="TransactionScope.cs" />
+    <Compile Include="ImsDataContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
